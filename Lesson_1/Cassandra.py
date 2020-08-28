@@ -46,6 +46,8 @@ except Exception as e:
 ### Create music_library - the album year will be the partition key
 ### the artist name will be the clusterin column
 ### (remember: there are no duplicates in Cassandra!)
+###
+### We need to think beforehand what we want to query later on to define the primary key properly!
 ###----------------------------------------------------------------------------------------
 
 query = 'CREATE TABLE IF NOT EXISTS music_library '
