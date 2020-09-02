@@ -47,7 +47,7 @@ except Exception as e:
 ###----------------------------------------------------------------------------------------
 
 query = 'CREATE TABLE IF NOT EXISTS music_library '
-query += '(year int, city text, artist_name text, album_name text, PRIMARY KEY (artist_name, album_name, city))'
+query += '(year int, city text, artist_name text, album_name text, PRIMARY KEY (year, artist_name))'
 
 try:
 
