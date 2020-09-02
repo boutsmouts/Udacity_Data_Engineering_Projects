@@ -7,7 +7,7 @@ from cassandra.cluster import Cluster
 
 try:
 
-    cluster = Cluster(['localhost'], port = 6000)
+    cluster = Cluster(['localhost'])
     session = cluster.connect()
 
 except Exception as e:
