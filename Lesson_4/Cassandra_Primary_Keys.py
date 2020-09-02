@@ -79,7 +79,7 @@ except Exception as e:
 ### Query data from table
 ###----------------------------------------------------------------------------------------
 
-query = "select * from music_library WHERE ARTIST_NAME = 'The Beatles'"
+query = "select * from music_library WHERE ARTIST_NAME = 'The Beatles' AND ALBUM_NAME = 'Let it Be'"
 
 try:
 
