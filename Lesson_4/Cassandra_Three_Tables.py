@@ -134,6 +134,23 @@ except Exception as e:
 for row in rows:
     print (row.year, row.artist_name, row.album_name)
 
+###----------------------------------------------------------------------------------------
+### Drop tables and shut down
+###----------------------------------------------------------------------------------------
+
+query_0 = 'DROP TABLE music_library' # On a real system you would never do this query!
+query_1 = 'DROP TABLE artist_library'
+query_2 = 'DROP TABLE album_library'
+
+try:
+
+    session.execute(query_0)
+    session.execute(query_1)
+    session.execute(query_2)
+
+except Exception as e:
+
+    print(e)
 
 session.shutdown()
 cluster.shutdown()
