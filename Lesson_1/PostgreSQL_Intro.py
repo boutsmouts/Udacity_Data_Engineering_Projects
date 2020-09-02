@@ -1,7 +1,7 @@
 import psycopg2
 
 ###----------------------------------------------------------------------------------------
-### Connect to local Postgres database and cget cursor to the database (autocommit is True)
+### Connect to local Postgres database and get cursor to the database (autocommit is True)
 ###----------------------------------------------------------------------------------------
 
 try:
