@@ -2,7 +2,7 @@ import cassandra
 from cassandra.cluster import Cluster
 
 ###----------------------------------------------------------------------------------------
-### Connect to the cluster on localhost under port 6000 (specified in YAML for docker)
+### Connect to the cluster on localhost under port 9042 (default - specified in YAML for docker)
 ###----------------------------------------------------------------------------------------
 
 try:
