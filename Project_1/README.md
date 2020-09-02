@@ -18,7 +18,7 @@ The preferred schema for this analysis is a star schema with one fact table and 
 
 #### Fact Table
 
-1. songplays: holds log data associated with song plays filtered using 'NextSong' for page
+1. songplays: holds log data associated with song plays filtered using ``'NextSong'`` for page
     - songplay_id (SERIAL - PRIMARY KEY): Unique ID for song plays
     - start_time (TIMESTAMP): Timestamp when song play was started (refers to table time - see below)
     - user_id (INT): User ID (refers to table users - see below)
@@ -68,11 +68,11 @@ The preferred schema for this analysis is a star schema with one fact table and 
 
 The following files are included for this project:
 
-  1. 'sql_queries.py', used to store necessary SQL queries to create, fill and query the tables
-  2. 'create_tables.py', used to create the database and relevant tables; requires 'sql_queries.py'
-  3. 'etl.py', used to read, process and store the given JSON song and log files in the database; requires 'sql_queries.py'
-  4. 'etl.ipynb', used to read and process a single file from JSON song and log data (for introductory purposes)
-  5. 'test.ipynb', used to test the implemented tables in the database with sample queries
+  1. ``sql_queries.py``, used to store necessary SQL queries to create, fill and query the tables
+  2. ``create_tables.py``, used to create the database and relevant tables; requires ``sql_queries.py``
+  3. ``etl.py``, used to read, process and store the given JSON song and log files in the database; requires ``sql_queries.py``
+  4. ``etl.ipynb``, used to read and process a single file from JSON song and log data (for introductory purposes)
+  5. ``test.ipynb``, used to test the implemented tables in the database with sample queries
 
 Mandatory python modules to run the scripts:
 
@@ -81,13 +81,13 @@ Mandatory python modules to run the scripts:
 - glob
 - pandas
 
-Note: The solution to the project has been developed locally using only the python files ('.py') provided and no Jupyter Notebooks ('.ipynb'). Developed using Python 3.6.10.
+Note: The solution to the project has been developed locally using only the python files (``.py``) provided and no Jupyter Notebooks (``.ipynb``). Developed using Python 3.6.10.
 
 #### Instructions to run the program
 
 Use the following steps to create the desired database and tables for the project. Repeat if necessary.
 
-1. Run 'create_tables.py' in your terminal using: 'python create_tables.py'
-2. Run 'etl.py' in your terminal using: 'python etl.py'
+1. Run ``create_tables.py`` in your terminal using: ``python create_tables.py``
+2. Run ``etl.py`` in your terminal using: ``python etl.py``
 
-Note: For successfully running these two scripts, you may need to adjust your 'PWD' of your terminal to the folder where 'create_tables.py', 'sql_queries.py', and 'etl.py' are stored.
+Note: For successfully running these two scripts, you may need to adjust the ``pwd`` of your terminal to the folder where ``create_tables.py``, ``sql_queries.py``, and ``etl.py`` are stored.
