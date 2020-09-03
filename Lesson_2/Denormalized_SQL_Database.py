@@ -6,7 +6,7 @@ import psycopg2
 
 try:
 
-    conn = psycopg2.connect("host=localhost dbname=postgres user=postgres password=example port = 7000")
+    conn = psycopg2.connect("host=localhost dbname=postgres user=postgres password=example port = 5432")
 
 except psycopg2.Error as e:
 
