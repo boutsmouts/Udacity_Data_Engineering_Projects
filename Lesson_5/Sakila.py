@@ -417,3 +417,12 @@ JOIN dimDate ON (factSales.date_key = dimDate.date_key)
 JOIN dimStore ON (factSales.store_key = dimStore.store_key)
 GROUP BY grouping sets ((), dimDate.month, dimStore.country, (dimDate.month, dimStore.country))
 LIMIT 20;
+
+#BY CUBE
+
+%%sql
+SELECT dimDate.month, dimStore.country, SUM(sales_amount) AS revenue FROM factSales
+JOIN dimDate ON (factSales.date_key = dimDate.date_key)
+JOIN dimStore ON (factSales.store_key = dimStore.store_key)
+GROUP BY CUBE(dimDate.month, dimStore.country)
+LIMIT 20;
