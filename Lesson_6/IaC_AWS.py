@@ -3,7 +3,7 @@ import boto3
 import json
 import configparser
 from botocore.exceptions import ClientError
-%load_ext sql
+#load_ext sql
 
 config = configparser.ConfigParser()
 config.read_file(open('dwh.cfg'))
