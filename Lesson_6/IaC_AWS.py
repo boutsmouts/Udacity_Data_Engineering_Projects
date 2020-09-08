@@ -6,7 +6,7 @@ from botocore.exceptions import ClientError
 %load_ext sql
 
 config = configparser.ConfigParser()
-config.read_file(open(r''))
+config.read_file(open('dwh.cfg'))
 
 ### IMPORT CONFIGS ###
 
@@ -85,7 +85,7 @@ except Exception as e:
 print("1.2 Attaching Policy")
 
 iam.attach_role_policy(RoleName=DWH_IAM_ROLE_NAME,
-                       PolicyArn="arn:aws:iam::aws:policy/AmazonS3ReadOnlyAccess"
+                       PolicyArn="arn:aws:iam::aws:policy/AmazonS3FullAccess"
                       )['ResponseMetadata']['HTTPStatusCode']
 
 print("1.3 Get the IAM role ARN")
@@ -132,18 +132,18 @@ prettyRedshiftProps(myClusterProps)
 ### PRINT ENDPOINT AND ARN ###
 ### DO NOT RUN UNTIL CLUSTER IS AVAILABLE! ###
 
-if redshift.describe_clusters(ClusterIdentifier=DWH_CLUSTER_IDENTIFIER)['Clusters'][0]['ClusterStatus'] == 'available':
-    DWH_ENDPOINT = myClusterProps['Endpoint']['Address']
-    DWH_ROLE_ARN = myClusterProps['IamRoles'][0]['IamRoleArn']
-    print("DWH_ENDPOINT :: ", DWH_ENDPOINT)
-    print("DWH_ROLE_ARN :: ", roleArn)
+#if redshift.describe_clusters(ClusterIdentifier=DWH_CLUSTER_IDENTIFIER)['Clusters'][0]['ClusterStatus'] == 'available':
+#    DWH_ENDPOINT = myClusterProps['Endpoint']['Address']
+#    DWH_ROLE_ARN = myClusterProps['IamRoles'][0]['IamRoleArn']
+#    print("DWH_ENDPOINT :: ", DWH_ENDPOINT)
+#    print("DWH_ROLE_ARN :: ", roleArn)
 
 ### TEST CONNECTION USING SQL ###
 
-conn_string="postgresql://{}:{}@{}:{}/{}".format(DWH_DB_USER, DWH_DB_PASSWORD, DWH_ENDPOINT, DWH_PORT,DWH_DB)
-print(conn_string)
-%sql $conn_string
+#conn_string="postgresql://{}:{}@{}:{}/{}".format(DWH_DB_USER, DWH_DB_PASSWORD, DWH_ENDPOINT, DWH_PORT,DWH_DB)
+#print(conn_string)
+#%sql $conn_string
 
 ### DELETE CLUSTER ###
 
-redshift.delete_cluster( ClusterIdentifier=DWH_CLUSTER_IDENTIFIER,  SkipFinalClusterSnapshot=True)
+#redshift.delete_cluster( ClusterIdentifier=DWH_CLUSTER_IDENTIFIER,  SkipFinalClusterSnapshot=True)
