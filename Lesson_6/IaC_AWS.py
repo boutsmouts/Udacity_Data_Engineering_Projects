@@ -6,7 +6,7 @@ from botocore.exceptions import ClientError
 %load_ext sql
 
 config = configparser.ConfigParser()
-config.read_file(open(r'C:\Users\mhauck\Documents\GitHub\Udacity_Data_Engineering_Projects\Lesson_6\dwh.cfg'))
+config.read_file(open(r''))
 
 ### IMPORT CONFIGS ###
 
