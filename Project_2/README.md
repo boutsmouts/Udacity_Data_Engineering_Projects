@@ -113,7 +113,7 @@ The following files are included for this project:
   2. ``create_tables.py``, used to drop and recreate desired tables; requires ``sql_queries.py``
   3. ``etl.py``, used to read, process and store the given JSON song and log files in the database; requires ``sql_queries.py``
   4. ``setup_redshift.py``, used to setup a Amazon Redshift cluster including IAM user role and VPC group; requires ``dwh.cfg``
-  5. ``delete_redshift.py``, used to delte the created Amazon Redshift cluster including IAM user role and VPC group; requires ``dwh.cfg``, ``sql_queries.py``, and ``setup_redshift.py``
+  5. ``delete_redshift.py``, used to delete the created Amazon Redshift cluster including IAM user role and VPC group; requires ``dwh.cfg``, ``sql_queries.py``, and ``setup_redshift.py``
   6. ``dwh.cfg``, used to parse AWS settings and credentials
 
 Mandatory python modules to run the scripts:
