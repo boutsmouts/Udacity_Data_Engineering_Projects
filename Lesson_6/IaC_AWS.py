@@ -3,6 +3,7 @@ import boto3
 import json
 import configparser
 from botocore.exceptions import ClientError
+from botocore import exceptions
 #load_ext sql
 
 config = configparser.ConfigParser()
@@ -78,15 +79,18 @@ try:
                'Principal': {'Service': 'redshift.amazonaws.com'}}],
              'Version': '2012-10-17'})
     )
+
 except Exception as e:
     print(e)
 
-
 print("1.2 Attaching Policy")
 
-iam.attach_role_policy(RoleName=DWH_IAM_ROLE_NAME,
+try:
+    iam.attach_role_policy(RoleName=DWH_IAM_ROLE_NAME,
                        PolicyArn="arn:aws:iam::aws:policy/AmazonS3FullAccess"
                       )['ResponseMetadata']['HTTPStatusCode']
+except Exception as e:
+    print(e)
 
 print("1.3 Get the IAM role ARN")
 roleArn = iam.get_role(RoleName=DWH_IAM_ROLE_NAME)['Role']['Arn']

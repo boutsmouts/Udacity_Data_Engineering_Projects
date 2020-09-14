@@ -115,6 +115,7 @@ The following files are included for this project:
   4. ``setup_redshift.py``, used to setup a Amazon Redshift cluster including IAM user role and VPC group; requires ``dwh.cfg``
   5. ``delete_redshift.py``, used to delete the created Amazon Redshift cluster including IAM user role and VPC group; requires ``dwh.cfg``, ``sql_queries.py``, and ``setup_redshift.py``
   6. ``dwh.cfg``, used to parse AWS settings and credentials
+  7. ``sample_queries.py``, used to run two sample queries (OPTIONAL!)
 
 Mandatory python modules to run the scripts:
 
@@ -132,20 +133,39 @@ Note: The solution to the project has been developed locally using only the pyth
 
 Use the following steps to create the desired data warehouse for the project. Repeat if necessary.
 
-1. Insert your AWS settings and user credentials into ``dwh.cfg`` at:
-    - key: ``your AWS key``
-    - secret: ``your AWS secret key``
-    - db_name: ``your desired database name``
-    - db_user: ``your desired database user``
-    - db_password: ``your desired database password``
-    - db_port: ``your desired database port``
-    - identifier: ``your desired identifier for the Redshift cluster``
-    - security_group_name: ``your desired VPC group name``
-    - name: ``your desired IAM role name``
+1. Insert your AWS settings and user credentials into ``dwh.cfg`` at empty spaces:
+    ```
+    [AWS]
+    key =
+    secret =
+
+    [CLUSTER]
+    host = UPDATED_AUTOMATICALLY
+    db_name = db
+    db_user = db_usr
+    db_password = P4ssw0rd
+    db_port = 5439
+    identifier =
+    type = multi-node
+    num_nodes = 4
+    node_type = dc2.large
+    region = us-west-2
+    security_group_name =
+
+    [IAM]
+    policy_arn = arn:aws:iam::aws:policy/AmazonS3ReadOnlyAccess
+    name =
+    role_arn = UPDATED_AUTOMATICALLY
+
+    [S3]
+    log_data = 's3://udacity-dend/log_data'
+    log_jsonpath = 's3://udacity-dend/log_json_path.json'
+    song_data = 's3://udacity-dend/song_data'
+    ```
 2. Run ``setup_redshift.py`` in your terminal using: ``python setup_redshift.py``
 3. Run ``create_tables.py`` in your terminal using: ``python create_tables.py``
 4. Run ``etl.py`` in your terminal using: ``python etl.py``
-5. Perform some awesome analytics with the data!
+5. Perform some awesome analytics with the data! (e.g., use ``sample_queries.py``)
 6. Run ``delete_redshift.py`` in your terminal using: ``python delete_redshift.py``
 
-Note: For successfully running these four scripts, you may need to adjust the ``pwd`` of your terminal to the folder where ``create_tables.py``, ``sql_queries.py``, ``etl.py``, ``setup_redshift.py``, ``delete_redshift.py``, and ``dwh.cfg`` are stored.
+Note: For successfully running these four scripts, you may need to adjust the ``pwd`` of your terminal to the folder where ``create_tables.py``, ``sql_queries.py``, ``etl.py``, ``setup_redshift.py``, ``delete_redshift.py``, ``dwh.cfg``, and ``sample_queries.py`` are stored.
