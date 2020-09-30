@@ -1,4 +1,4 @@
-# Project 1: Data Modeling with Postgres
+# Project 1A: Data Modeling with Postgres
 
 ## Introduction
 This project is part of the Udacity Data Engineer Nano Degree Program. The startup "Sparkify" wants a database to analyze collected user and song data stored locally as JSON files. Their particular interest lies on what songs their customers are listening to, which is why they need an easy to query database.
