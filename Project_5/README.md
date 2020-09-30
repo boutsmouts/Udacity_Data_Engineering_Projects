@@ -43,45 +43,54 @@ The Apache Airflow DAG is shown below: <br>
 ![DAG_Project5](https://github.com/mhauck-FFM/Udacity_Data_Engineering_Projects/blob/master/Project_5/DAG_Airflow_project_5.png)
 
 <br>
-The project consists of the following files: <br>
+The project consists of the following files (under the given branches):
+
 ```
 .../airflow/dags:
   - sparkify_pipeline.py
+
+.../airflow/plugins/operators:
+  - __init__.py
+  - create_tables.py
+  - create_tables.sql
+  - stage_redshift.py
+  - load_fact.py
+  - load_dimension.py
+  - data_quality.py
+
+.../airflow/plugins/helpers:
+  - __init__.py
+  - sql_queries.py
 ```
 
-The following files are included for this project:
-
-  1. ``dl.cfg``, used to parse your AWS key and secret key
-  2. ``etl.py``, main program to initialize the data lake and ELT process
+The Airflow DAG in ``sparkify_pipeline.py`` runs the following operators to execute the ETL pipeline:
+  1. Begin the execution with a ``DummyOperator``
+  2. Create the tables on Redshift with the ``CreateTablesOperator`` in ``create_tables.py``, which requires ``create_tables.sql``
+  3. Stage data from S3 to Redshift using the ``StageToRedshiftOperator`` in ``stage_redhsift.py``
+  4. Load the ``songplays`` fact table using the ``LoadFactOperator`` in ``load_fact.py``, which requires ``sql_queries.py``
+  5. Load the ``songs``, ``artists``, ``users``, and ``time`` dimension tables using the ``LoadDimensionOperator`` in ``load_dimension.py``, which requires ``sql_queries.py``
+  6. Perform quality checks for all fact and dimension tables using the ``DataQualityOperator`` in ``data_quality.py``
+  7. Stop the execution with a ``DummyOperator``
 
 Mandatory python modules to run the scripts:
 
-- pyspark
-- configparser
-- datetime
+- airflow
+- helpers
 - os
+- datetime
 
 Note: The solution to the project has been developed locally using only the python files (``.py``) in Python 3.6.10.
 
 #### Instructions to run the program
 
-To run the program, start with the following first step:
+To run the program, make sure to do the following preparations first:
 
-1. Insert your AWS user credentials into ``dl.cfg`` at empty spaces:
-    ```
-    [AWS]
-    key =
-    secret =
-    ```
+1. Setup a Redshift cluster (you may use the scripts from [Project 2](https://github.com/mhauck-FFM/Udacity_Data_Engineering_Projects/tree/master/Project_2))
+2. Setup your Airflow correctly (add your aws_credentials and redshift as connection)
+3. Make sure the files are in the correct folders of your (local) Airflow distribution
 
-Now, there are two options to run the program:
+Now, connect to the Airflow WebUI and the DAG should appear in the overview:
 
-2. RUNNING THE SCRIPT: Run ``etl.py`` in the terminal using: ``python etl.py``
+4. Activate the DAG in the WebUI and trigger it if necessary. The project should run smoothly and all operators should finish successfully
 
-This method will use your local Spark installation or, if using an EMR notebook, the EMR clusters Spark installation. This may take some time to complete if run on your local machine!
-
-2. SUBMIT TO EMR CLUSTER: Submit ``etl.py`` to the cluster by using the following in the master-node terminal: ``spark-submit etl.py --master yarn``
-
-This method will use Spark on an EMR cluster. Make sure that the IAM role has read/write access to S3 and that the .py file is located on the master-node (SSH/SCP required). You might have to locate and adjust the spark-submit statement by using ``which spark-submit`` in the master-node terminal. Make sure the hadoop-aws.jar is present, otherwise there will be errors running the script.
-
-Note: For successfully running the script, you may need to adjust the ``pwd`` of your terminal to the folder where both ``etl.py`` and ``dl.cfg`` are stored.
+Note: Terminate the Redshift cluster after the project is done to save costs!
