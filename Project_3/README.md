@@ -3,7 +3,7 @@
 ## Introduction
 This project is part of the Udacity Data Engineer Nano Degree Program. The music streaming startup "Sparkify" has grown steadily and now wants a cloud data lake to store and query their user and song data on Amazon Web Services (AWS). Their data are stored as JSON files in S3 buckets on AWS. Their particular interest lies on what songs their customers are listening to, which is why they need an easy to query database.
 
-The task is to access the raw data on S3, execute an ELT process to transform the data into different tables with Apache Spark on Amazon Elatic MapReduce (EMR), and store the resulting tables as .parquet files on S3, separated by certain criteria.
+The task is to access the raw data on S3, execute an ELT process to transform the data into different tables with Apache Spark on Amazon Elastic MapReduce (EMR), and store the resulting tables as .parquet files on S3, separated by certain criteria.
 
 ## Datasets
 
