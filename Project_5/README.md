@@ -39,6 +39,7 @@ Airflow calls multiple operators that stages the data from S3 buckets into two s
 ## Program Structure
 
 The Apache Airflow DAG is shown below: <br>
+<br>
 ![DAG_Project5](https://github.com/mhauck-FFM/Udacity_Data_Engineering_Projects/blob/master/Project_5/DAG_Airflow_project_5.png)
 
 
