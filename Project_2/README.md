@@ -1,4 +1,4 @@
-# Project 3: Data Warehouse on AWS
+# Project 2: Data Warehouse on AWS
 
 ## Introduction
 This project is part of the Udacity Data Engineer Nano Degree Program. The music streaming startup "Sparkify" has significantly grown and now wants a cloud data warehouse to store and query their user and song data on Amazon Redshift. Their data are stored as JSON files in S3 buckets on AWS. Their particular interest lies on what songs their customers are listening to, which is why they need an easy to query database.
