@@ -148,7 +148,7 @@ To ease the setup and queries for the user, the program also features four more 
   1. ``dwh.cfg``, a config file for AWS credentials and Redshift settings
   2. ``setup_redshift.py``, a python script to setup a Redshift cluster using the settings in ``dwh.cfg``
   3. ``run_sql_insights.py``, a python script to run the desired SQL queries (uses ``dwh.cfg``)
-  4. ``delete_redshift.py``, a python script to delete the Redshift cluster
+  4. ``delete_redshift.py``, a python script to delete the Redshift cluster (uses ``dwh.cfg``)
 
 Mandatory python modules to run the scripts:
 
