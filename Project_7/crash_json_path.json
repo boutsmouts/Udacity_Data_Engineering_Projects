@@ -1,0 +1,19 @@
+{
+    "jsonpaths": [
+		"$['COLLISION_ID']",
+        "$['CRASH DATE']",
+        "$['CRASH TIME']",
+        "$['BOROUGH']",
+        "$['ZIP CODE']",
+		"$['ON STREET NAME']",
+        "$['LATITUDE']",
+        "$['LONGITUDE']",
+        "$['NUMBER OF PERSONS INJURED']",
+        "$['NUMBER OF PERSONS KILLED']",
+		"$['CONTRIBUTING FACTOR VEHICLE 1']",
+		"$['CONTRIBUTING FACTOR VEHICLE 2']",
+		"$['CONTRIBUTING FACTOR VEHICLE 3']",
+		"$['CONTRIBUTING FACTOR VEHICLE 4']",
+		"$['CONTRIBUTING FACTOR VEHICLE 5']"
+    ]
+}
