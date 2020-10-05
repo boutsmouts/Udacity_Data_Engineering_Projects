@@ -17,9 +17,9 @@ The goal of this project is to answer the following questions:
 
 To answer these questions, two datasets are used and loaded into the data warehouse. The data are:
 
-1. Real reported car crash data in New York City (freely available under [this](https://data.cityofnewyork.us/Public-Safety/Motor-Vehicle-Collisions-Crashes/h9gi-nx95) link). Consists of almost 1.8 million rows of raw data.
+1. Real reported car crash data in New York City (freely available under [this](https://data.cityofnewyork.us/Public-Safety/Motor-Vehicle-Collisions-Crashes/h9gi-nx95) link). Consists of almost **1.8 million rows** of raw data.
 
-2. Real reported temperature, humidity and pressure data of New York City (freely available under [this](https://www.kaggle.com/selfishgene/historical-hourly-weather-data) link). Consists of circa 60000 rows of raw data each.
+2. Real reported temperature, humidity and pressure data of New York City (freely available under [this](https://www.kaggle.com/selfishgene/historical-hourly-weather-data) link). Consists of circa **60000 rows** of raw data each.
 
 The data are stored as two different file types in an S3 bucket and can be found here:
 
