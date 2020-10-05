@@ -4,8 +4,10 @@
 
 New York City is one of the busiest cities in the world with circa 8.5 million citizens and almost 20 million citizens in its metropolitan area (see [Wikipedia](https://de.wikipedia.org/wiki/New_York_City)). This implies that the current traffic situation within the city is quite heavy, which inevitably leads to traffic accidents all over the city. It is likely that that the occurence of these car crashes and accidents accumulates around main traffic axes of the city and follows certain temporal patterns. Additionally, the weather conditions might also have an influence on these accidents.
 
-The focus of this Capstone Project is to build a cloud data warehouse in Amazon Redshift using data on S3, fill it with suitable datasets on a plannable time scale using Apache Airflow and run SQL queries on AWS Redshift to answer the following questions:
-  - What are the months with the most crashes reported?
+The focus of this Capstone Project is to build a cloud data warehouse in Amazon Redshift using data on S3, fill it with suitable datasets on a scalable time scale using Apache Airflow and run SQL queries against the database on AWS Redshift. AWS Redshift is selected, as it is a highly flexible yet structured database solution that can handle significant amounts of data easily. Apache Airflow is introduced to create a scalable workflow that grows with the data and can be scheduled easily.
+
+The goal of this project is to answer the following questions:
+  - What are the months with the most car crashes reported?
   - What are the weekdays and hours of the day with the most crashes reported?
   - What are the streets where the most crashes occur?
   - Can we find relations between the prevalent weather condition and the car crashes?
