@@ -105,3 +105,110 @@ Here is an overview of the star schema:
 For full scalability on size and time scale of the ETL pipeline and data warehouse, the process is designed to be a DAG in Apache Airflow. The DAG is structured as follows:
 
 ![DAG_Capstone](https://github.com/mhauck-FFM/Udacity_Data_Engineering_Projects/blob/master/Project_7/capstone_DAG.png)
+
+The project consists of the following files (under the given branches):
+
+```
+...:
+  - setup_redshift.py
+  - run_sql_insights.py
+  - delete_redshift.py
+  - dwh.cfg
+
+.../airflow/dags:
+  - capstone_pipeline.py
+
+.../airflow/plugins/operators:
+  - __init__.py
+  - create_tables.py
+  - create_tables.sql
+  - stage_redshift.py
+  - load_fact.py
+  - load_dimension.py
+  - data_quality.py
+
+.../airflow/plugins/helpers:
+  - __init__.py
+  - sql_queries.py
+```
+
+The Airflow DAG in ``sparkify_pipeline.py`` runs the following operators to execute the ETL pipeline:
+  1. Begin the execution with a ``DummyOperator``
+  2. Create the tables on Redshift with the ``CreateTablesOperator`` in ``create_tables.py``, which requires ``create_tables.sql``
+  3. Stage data from S3 to Redshift using the ``StageToRedshiftOperator`` in ``stage_redhsift.py``
+  4. Perform quality checks for all staging tables (``staging_crashes``, ``staging_temperature``, ``staging_humidity``, and ``staging_pressure``) using the ``DataQualityOperator`` in ``data_quality.py``
+  5. Load the ``incidents`` fact table using the ``LoadFactOperator`` in ``load_fact.py``, which requires ``sql_queries.py``
+  6. Load the ``locations``, ``weather``, and ``time`` dimension tables using the ``LoadDimensionOperator`` in ``load_dimension.py``, which requires ``sql_queries.py``
+  7. Perform quality checks for all fact and dimension tables using the ``DataQualityOperator`` in ``data_quality.py``
+  8. Stop the execution with a ``DummyOperator``
+
+To ease the setup and queries for the user, the program also features four more relevant files:
+  1. ``dwh.cfg``, a config file for AWS credentials and Redshift settings
+  2. ``setup_redshift.py``, a python script to setup a Redshift cluster using the settings in ``dwh.cfg``
+  3. ``run_sql_insights.py``, a python script to run the desired SQL queries (uses ``dwh.cfg``)
+  4. ``delete_redshift.py``, a python script to delete the Redshift cluster
+
+Mandatory python modules to run the scripts:
+
+- airflow
+- helpers
+- os
+- datetime
+- pandas
+- psycopg2
+- configparser
+
+Note: The solution to the project has been developed locally using only the python files (``.py``) in Python 3.6.10.
+
+# Instructions to run the program
+
+To run the program, make sure to do the following preparations first:
+
+1. Setup a Redshift cluster (insert your credentials into ``dwh.cfg`` and run ``setup_redshift.py`` in your local terminal)
+2. Setup your Airflow correctly (add your aws_credentials and redshift as connection)
+3. Make sure the files are in the correct folders of your (local) Airflow distribution
+
+Now, connect to the Airflow WebUI and the DAG should appear in the overview:
+
+4. Activate the DAG in the WebUI and trigger it if necessary. The project should run smoothly and all operators should finish successfully
+5. Run some awesome SQL queries and gain insights! (run ``run_sql_insights.py`` in your terminal)
+
+Note: Terminate the Redshift cluster after the project is done to save costs (execute ``delete_redshift.py`` in your local terminal)!
+
+# Gained Insights
+
+Using this scalable data warehouse on AWS, we can run queries and answer the questions postulated at the beginning of this document:
+
+**What are the months with the most crashes reported?**
+
+According to the data, the month with the overall largest number of reported car crashes is *March* with 148613 incidents, directly followed by *February* and *January* with 148063 and 146521 respectively. This is an intersting outcome, as it is not directly clear why the most incidents occur during the first three months of a year. This could be related to the weather conditions or other factors, such as vacation periods, public holidays, etc.
+
+**What are the weekdays and hours of the day with the most crashes reported?**
+
+The largest number of crashes occurs in the afternoon around 2 p.m. (103193), 4 p.m. (111193), and 5 p.m. (108230). This is most likely related to the afternoon rush hour, when people are driving home from work. Interestingly, there is no clear weekday with a distinct maximum, but a rather uniform distirbution of incidents throughout the week (circa 215000 incidents each day). Naturally, one would expect that during the week, when people are going to work, more car accidents are likely to happen.
+
+**What are the streets where the most crashes occur?**
+
+The three streets with the largest amount of reported car crashes are *Broadway* (13439), *3rd Avenue* (11302), and *Belt Parkway* (10887). This appears reasonable, since Broadway and 3rd Avenue are busy streets in Downtown New York City, while Belt Parkway is a busy highway connecting the city with John F. Kennedy Intl. Airport.
+
+**Can we find relations between the prevalent weather condition and the car crashes?**
+
+The data show that the most accidents happen between -5 °C and +15 °C (595625), while above +15 °C only half as much (191373) and below -5 °C only 10585 incidents are reported. This appears reasonable, since -5 °C to +15 °C is an interval of temperatures often found in winter/fall/spring, where precipitation and freezing temperatures boost the occurence of crashes (slippery roads, etc.). Also, people are more likely to drive during bad/cold weather in winter and fall.
+
+**What are the years with the most injuries reported?**
+
+Sadly, the year 2019 reports the most injuries and fatal casualties of all years with 56962 injuries and 234 lost lives. This corresponds to 0.64 fatalities a day and more than 156 injuries a day. Quite a large amount, even for New York City.
+
+# Outlook to other scenarios
+
+**What if the data were increased by 100x?**
+
+As we are in a highly scalable environment with Amazon Redshift, we could just increase the number of workers and/or upgrade the type of workers used to fit the increased amount of data.
+
+**What if the data pipeline would be run on a daily basis by 7 a.m. every day?**
+
+As we are using Apache Airflow, we can easily schedule the DAG to run on a daily schedule.
+
+**What if 100+ people need to access the database?**
+
+Again, AWS Redshift is highly scalable and can handle multiple SQL requests simultaneously. If not, increase the number/type of workers to fit the need.
