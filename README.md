@@ -6,4 +6,4 @@ My solutions to the projects within the Udacity Data Engineering Nanodegree
 3. [Project 2](https://github.com/mhauck-FFM/Udacity_Data_Engineering_Projects/tree/master/Project_2): Data Warehouse on AWS
 4. [Project 3](https://github.com/mhauck-FFM/Udacity_Data_Engineering_Projects/tree/master/Project_3): Data Lake on AWS
 5. [Project 5](https://github.com/mhauck-FFM/Udacity_Data_Engineering_Projects/tree/master/Project_5): Data Pipelines with Apache Airflow
-6. Project 7: Capstone Project (coming soon!)
+6. [Project 7](https://github.com/mhauck-FFM/Udacity_Data_Engineering_Projects/tree/master/Project_7): Capstone Project
