@@ -207,7 +207,7 @@ As we are in a highly scalable environment with Amazon Redshift, we could just i
 
 **What if the data pipeline would be run on a daily basis by 7 a.m. every day?**
 
-As we are using Apache Airflow, we can easily schedule the DAG to run on a daily schedule.
+As we are using Apache Airflow, we can easily schedule the DAG to run on a daily schedule. The SQL insight queries might be included into the DAG if need be.
 
 **What if 100+ people need to access the database?**
 
