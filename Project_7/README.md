@@ -62,7 +62,7 @@ To gain the above defined insights, the data are first loaded from the S3 bucket
 
 After the staging process, the data from the staging tables are loaded into a star schema with one fact table and three related dimension tables. The tables are designed as follows and the star schema can be seen in the picture below. Note that the data are filtered so that ``latitude`` and ``longitude`` are not NULL and unequal to ``0.0``:
 
-1. ``incidents``: holds the incident facts
+1. FACT: ``incidents``: holds the incident facts
    - collision_id (int, PRIMARY KEY): unique identifier of each crash
    - timestamp (timestamp): timestamp of each crash
    - location_id (timestamp): an identifier for the crash location
@@ -72,7 +72,7 @@ After the staging process, the data from the staging tables are loaded into a st
    - causes (varchar): causing factor of the crash for each involved car
 
 
-2. ``locations``:  holds information about the crash location
+2. DIMENSION: ``locations``:  holds information about the crash location
    - location_id (varchar, PRIMARY KEY): unique identifier of the crash location
    - borough (varchar): the borough of the crash location
    - zip (varchar): the zip code of the crash location
@@ -81,14 +81,14 @@ After the staging process, the data from the staging tables are loaded into a st
    - longitude (float): geographical longitude of the crash location
 
 
-3. ``weather``: holds weather data for the timestamps
+3. DIMENSION: ``weather``: holds weather data for the timestamps
    - timestamp (timestamp, PRIMARY KEY): unique timestamp
    - temperature (float): air temperature reported in K (273.15 K == 0 °C)
    - humidity (float): relative humidity reported in %
    - pressure (float): air pressure reported in hPa (1013.25 hPa == standard pressure == 1 bar)
 
 
-4. ``time``: holds information about each timestamp
+4. DIMENSION: ``time``: holds information about each timestamp
    - timestamp (timestamp, PRIMARY KEY): unique timestamp
    - hour (int): hour of the timestamp
    - day (int): day of the timestamp
@@ -97,6 +97,11 @@ After the staging process, the data from the staging tables are loaded into a st
    - weekday (varchar): weekday of the timestamp (0 == Sunday)
 
 Here is an overview of the star schema:
+
 ![Star_Schema_Capstone](https://github.com/mhauck-FFM/Udacity_Data_Engineering_Projects/blob/master/Project_7/Star_Schema_Capstone.png)
 
 # Program Structure
+
+For full scalability on size and time scale of the ETL pipeline and data warehouse, the process is designed to be a DAG in Apache Airflow. The DAG is structured as follows:
+
+![DAG_Capstone](https://github.com/mhauck-FFM/Udacity_Data_Engineering_Projects/blob/master/Project_7/capstone_DAG.png)
